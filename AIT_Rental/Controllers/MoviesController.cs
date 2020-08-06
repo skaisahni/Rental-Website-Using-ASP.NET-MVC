@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AIT_Rental.Models;
+using AIT_Rental.ViewModels;
 
 namespace AIT_Rental.Controllers
 {
@@ -13,9 +14,16 @@ namespace AIT_Rental.Controllers
         public ActionResult Random()
         {
             var movie = new Movie() { Name = "dangal" };
-
-            //return View(movie);
-            return RedirectToAction("Index","Home", new { page =1 , sortBy ="name"});
+            var customers = new List<Customer> {
+                new Customer{Name = "Customer 1" },
+                new Customer{ Name ="Customer 2"} 
+            };
+            var viewModel = new RandomMovieViewModel {
+                Movie = movie,
+                Customers = customers
+            };
+            return View(viewModel);
+            //return RedirectToAction("Index","Home", new { page =1 , sortBy ="name"});
         }
         public ActionResult Edit(int MovieId)
         {
